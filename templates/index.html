@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Quality Reports</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="logo">
+            <h2>DASHBOARD</h2>
+        </div>
+        <div class="download">
+            <a href="#">
+                <img src="/static/bxs-download.svg" alt="" srcset="">
+                <span>Download</span>
+            </a>
+        </div>
+    </div>
+    <div class="cards">
+        <div class="records-cards records">
+            <h4 class="card-label">Total Records</h4>
+            <p class="number" id="records">{{ data.Total_Records }}</p>
+        </div>
+        <div class="records-cards columns">
+            <h4 class="card-label">Total Columns</h4>
+            <p class="number" id="columns">{{ data.Total_Columns }}</p>
+        </div>
+        <div class="records-cards missing">
+            <h4 class="card-label">Missing Columns</h4>
+            <p class="number" id="missing">{{ data.missing_columns }}</p>
+        </div>
+        <div class="records-cards primarykey">
+            <h4 class="card-label">Null Counts</h4>
+            <p class="number" id="null_counts">{{ data.Null_Records }}</p>
+        </div>
+        <div class="records-cards primarykey">
+            <h4 class="card-label">Primary Key</h4>
+            <p class="number" id="primarykey">{{ data.pk_check }}</p>
+        </div>
+        <div class="records-cards primarykey">
+            <h4 class="card-label">PK Duplicates</h4>
+            <p class="number" id="pk_duplicates">{{ data.pk_duplicates }}</p>
+        </div>
+    </div>
+    <div class="charts">
+        <div class="metrics">
+            <canvas id="metrics"></canvas>
+        </div>
+        <div class="data_history">
+            <canvas id="data_history"></canvas>
+        </div>
+    </div>
+    <script src="/static/scripts.js"></script>
+</body>
+</html>

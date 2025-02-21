@@ -1,0 +1,115 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    overflow: hidden;
+    background-color: whitesmoke;
+}
+
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+}
+
+.main .logo h2{
+    color: #2f59a7;
+    font-weight: 700;
+    padding: 0px 0px 0px 20px;
+}
+
+.main .download a {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    color: black;
+    font-weight: 300;
+    margin-right: 20px;
+    background-color: rgb(105, 239, 123);
+    padding: 10px 10px;
+    border-radius: 10px;
+    gap: 5px;
+}
+
+.download a img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===============================Cards ====================================== */
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0px 0px 0px;
+    gap: 25px;
+}
+
+.cards .records-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10%;
+    border-radius: 15px;
+    padding: 0px 10px 0px 10px;
+}
+
+.cards .records-cards .number {
+    font-size: 20px;
+}
+
+.cards .records {
+    background-color: white;
+}
+
+.cards .columns {
+    background-color: white;
+}
+
+.cards .missing {
+    background-color: white;
+}
+
+.cards .primarykey {
+    background-color: white;
+}
+
+
+/* ================================== charts =================================== */
+
+.charts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    /* width: 700px;
+    height: 500px; */
+}
+
+.metrics {
+    height: 320px;
+    width: 620px;
+    margin: 50px 0px 0px 20px;
+    background-color: white;
+    border-radius: 12px;
+    padding: 10px 10px 10px 10px; 
+    /* flex: 1; */
+}
+
+.data_history {
+    height: 320px;
+    width: 620px;
+    margin: 50px 20px 0 0;  
+    padding: 10px 30px 10px 10px; 
+    background-color: white;
+    border-radius: 12px;
+        /* flex: 1; */
+}

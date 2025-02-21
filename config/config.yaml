@@ -1,0 +1,38 @@
+dataset_folder: "inputs"
+domain_name: finance
+subjects: 
+  credit_card:
+    path: "${dataset_folder}/${domain_name}/credit_card_fraud.csv"
+    header: True,
+    delimiter: "|"
+    compression: "gzip"
+    filename_date_format: "yyyy.MM.dd"
+    primary_key: "TransactionID"
+    foregin_key: "UserID"
+    column_sequence: [
+      'TransactionID',
+      'UserID',
+      'TransactionAmount',
+      'TransactionDate',
+      'TransactionType',
+      'Merchant',
+      'Location',
+      'CardType',
+      'IsFraud'
+    ]
+  
+    DataType:
+      TransactionID: IntegerType()
+      UserID: IntegerType()
+      TransactionAmount: FloatType()
+      TransactionDate: DataType()
+      TransactionType: StringType()
+      Merchant: StringType()
+      Location: StringType()
+      CardType: StringType()
+      IsFraud: IntegerType()
+
+    Constraints:
+      TransactionAmount:
+        min: 2000
+        max: 5000

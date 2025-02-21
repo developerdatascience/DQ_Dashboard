@@ -1,0 +1,5 @@
+Metrics,Values,Pct
+null_counts,1231,6.034313725490196
+primarykey_duplicates,400,1.9607843137254901
+duplicate_count,398,1.9509803921568627
+missing_columns,0,0.0
