@@ -1,9 +1,15 @@
 import pandas as pd
+import glob
 from src.kpmg.pipeline.data_validation import DataValidation, DataIngestion
 from typing import Union
 import warnings
 pd.options.display.float_format = "{:,.2f}".format
 warnings.filterwarnings(action="ignore")
+from datetime import datetime
+from pyspark.sql import SparkSession
+from pyspark.sql.types import IntegerType, StringType, StructField, StructType
+
+spark = SparkSession.builder.appName("kutils").getOrCreate()
 
 
 def read_data() -> pd.DataFrame:
@@ -35,8 +41,31 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_column_null_report() -> pd.DataFrame:
-    null_df = DataValidation(df=DataIngestion(filepath="inputs/finance/credit_card_fraud.csv").read_data()).null_check()
-    null_df = null_df[["ColumnName", "NullCount"]]
-    return null_df
+    todays = datetime.today().strftime("%Y%m%d")
+    obj = DataValidation()
+    obj.main()
+    null_df = obj.null_check()
+    null_df = null_df.select("ColumnName", "NullCount")
+    null_report = null_df.toPandas()
+    return null_report
 
-print(get_column_null_report())
+def get_past_records():
+    file_records = {}
+    for file in glob.glob(pathname="archive/*.csv"):
+        filename = file.split("/")[1].split(".")[0]
+        count = spark.read.csv(file).count()
+        file_records[filename] = count
+    
+    schema = StructType(fields=
+                            [
+                            StructField("Date", StringType(), False),
+                            StructField("Value", IntegerType(), False)
+                            ]
+                            )
+
+    df = spark.createDataFrame([(k, v) for k, v in file_records.items()], schema)
+    print(df.show())
+    pd_df = df.toPandas()
+    pd_df.to_csv("artifacts/data_records.csv")
+    # print(pd_df)
+    return pd_df

@@ -7,13 +7,14 @@ from src.kpmg.utils import client
 from src.kpmg.pipeline.data_ingestion import DataIngestion
 from pathlib import Path
 import pandas as pd
+from datetime import datetime
 
 
 logger = logging.getLogger(__name__)
 
 class DataValidation:
-    def __init__(self, df):
-        self.df = df
+    def __init__(self):
+        self.df = DataIngestion().read_data()
         self.client = client.Client()
         self.null_report: Dict[str, Union[int, float, None]] = {}
         self.spark = SparkSession.builder.appName("datavalidation").getOrCreate()
@@ -36,9 +37,9 @@ class DataValidation:
         null_df = null_df.withColumn("TotalRows", lit(self.df.count())) \
                         .withColumn("NullPct", round((col("NullCount")/col("TotalRows"))*100,0)) \
                         .withColumn("Valid", when(col("NullPct") > 0.0, lit("❌")).otherwise(lit("✅")))
-        report_df = null_df.toPandas()
+        # report_df = null_df.toPandas()  
         logger.info("Null check report completed. ✅")
-        return report_df
+        return null_df
 
     def primaryKeyCheck(self):
         logger.info("Checking for presence Primary key Rule")
@@ -141,9 +142,7 @@ class DataValidation:
             'primary_key_check': "",
             'primarykey_duplicates': "",
             'duplicate_count': 0,
-            'missing_columns': "",
-            # 'out_of_range': {},
-            # 'invalid_dates': {}
+            'missing_columns': ""
         }
         stats['null_counts'] = self.null_check().select(sum(col("NullCount"))).collect()[0][0]
         stats['primary_key_check'] = self.primaryKeyCheck().select("Check").collect()[0][0]
@@ -155,6 +154,7 @@ class DataValidation:
         reports = reports.toPandas()
         reports.head()
         reports.to_csv("artifacts/reports.csv", index=True)
+        logger.info("reports exported to artifacts")
 
         logger.info("Check Completed......🛁")
 
@@ -165,7 +165,5 @@ class DataValidation:
     
 
 if __name__ == "__main__":
-    obj= DataValidation(
-        df=DataIngestion(filepath="inputs/finance/credit_card_fraud.csv").read_data()
-    )
-    print(obj.null_check().head())
+    obj= DataValidation()
+    print(obj.main())

@@ -4,7 +4,7 @@ body {
     box-sizing: border-box;
     font-family:Georgia, 'Times New Roman', Times, serif;
     overflow: hidden;
-    background-color: whitesmoke;
+    background-color: rgba(22, 31, 139, 0.798);
 }
 
 
@@ -39,6 +39,36 @@ body {
 .download a img {
     width: 20px;
     height: 20px;
+}
+
+/* =================================upload-section============================ */
+
+.upload-section {
+    background-color: white;
+    padding: 10px;
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 15px;
+}
+
+form input {
+    font-size: 14px;
+}
+
+form input[type="file"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+    margin: 8px 0;
+    font-size: 14px;
+}
+form button {
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
 }
 
 /* ===============================Cards ====================================== */
@@ -97,7 +127,7 @@ body {
 .metrics {
     height: 320px;
     width: 620px;
-    margin: 50px 0px 0px 20px;
+    margin: 40px 0px 0px 20px;
     background-color: white;
     border-radius: 12px;
     padding: 10px 10px 10px 10px; 
@@ -107,9 +137,9 @@ body {
 .data_history {
     height: 320px;
     width: 620px;
-    margin: 50px 20px 0 0;  
-    padding: 10px 30px 10px 10px; 
+    margin: 40px 0px 0px 20px;
     background-color: white;
     border-radius: 12px;
+    padding: 10px 10px 10px 10px;
         /* flex: 1; */
 }

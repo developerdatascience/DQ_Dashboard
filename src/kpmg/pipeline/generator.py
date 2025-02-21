@@ -38,9 +38,9 @@ class DataGeneratorPipeline:
         # Introduce inconsistent formats in the "Location" column
         df.loc[df.sample(frac=0.01).index, "Location"] = df["Location"].apply(lambda x: x.lower())
 
-        current_date = datetime.now().strftime("%Y_%m_%d")
+        current_date = datetime.now().strftime("%Y%m%d")
 
-        filename = f"credit_card_fraud_{current_date}.csv"
+        filename = f"{current_date}.csv"
 
         # Save to CSV
         file_path = f"inputs/finance/{filename}"

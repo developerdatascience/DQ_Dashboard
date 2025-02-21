@@ -1,5 +1,6 @@
 import pandas as pd
-from kutils import read_data, transform_data, get_column_null_report
+from kutils import read_data, transform_data, get_column_null_report, get_past_records
+from src.kpmg.utils import create_and_move_files
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -70,6 +71,7 @@ async def get_barchart_data():
 
 @app.get("/api/records", response_class=JSONResponse)
 async def get_data_records():
+    get_past_records()
     df = pd.read_csv("artifacts/data_records.csv")
     labels = df.Date.tolist()
     data = df.Value.tolist()
