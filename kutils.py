@@ -7,6 +7,7 @@ pd.options.display.float_format = "{:,.2f}".format
 warnings.filterwarnings(action="ignore")
 from datetime import datetime
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import to_date, col
 from pyspark.sql.types import IntegerType, StringType, StructField, StructType
 
 spark = SparkSession.builder.appName("kutils").getOrCreate()
@@ -51,7 +52,7 @@ def get_column_null_report() -> pd.DataFrame:
 
 def get_past_records():
     file_records = {}
-    for file in glob.glob(pathname="archive/*.csv"):
+    for file in glob.glob(pathname="archive/*.*"):
         filename = file.split("/")[1].split(".")[0]
         count = spark.read.csv(file).count()
         file_records[filename] = count
@@ -64,8 +65,8 @@ def get_past_records():
                             )
 
     df = spark.createDataFrame([(k, v) for k, v in file_records.items()], schema)
-    print(df.show())
+    df = df.withColumn("Date", to_date(col("Date"), format="yyyyMMdd"))
+    df = df.orderBy(col("Date").desc())
     pd_df = df.toPandas()
     pd_df.to_csv("artifacts/data_records.csv")
-    # print(pd_df)
     return pd_df

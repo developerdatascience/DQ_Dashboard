@@ -1,8 +1,8 @@
 ,Metrics,Values
-0,total_records,18720
+0,total_records,14872
 1,total_Columns,9
-2,null_counts,1698
+2,null_counts,3094
 3,primary_key_check,True
-4,primarykey_duplicates,720
-5,duplicate_count,707
+4,primarykey_duplicates,572
+5,duplicate_count,566
 6,missing_columns,0

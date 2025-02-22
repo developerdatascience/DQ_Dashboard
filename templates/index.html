@@ -28,27 +28,27 @@
     <div class="cards">
         <div class="records-cards records">
             <h4 class="card-label">Total Records</h4>
-            <p class="number" id="records">{{ data.Total_Records }}</p>
+            <p class="number" id="total_records">0</p>
         </div>
         <div class="records-cards columns">
             <h4 class="card-label">Total Columns</h4>
-            <p class="number" id="columns">{{ data.Total_Columns }}</p>
+            <p class="number" id="total_columns">0</p>
         </div>
         <div class="records-cards missing">
             <h4 class="card-label">Missing Columns</h4>
-            <p class="number" id="missing">{{ data.missing_columns }}</p>
+            <p class="number" id="missing_columns">0</p>
         </div>
         <div class="records-cards primarykey">
             <h4 class="card-label">Null Counts</h4>
-            <p class="number" id="null_counts">{{ data.Null_Records }}</p>
+            <p class="number" id="null_records">0</p>
         </div>
         <div class="records-cards primarykey">
-            <h4 class="card-label">Primary Key</h4>
-            <p class="number" id="primarykey">{{ data.pk_check }}</p>
+            <h4 class="card-label">Duplicates</h4>
+            <p class="number" id="duplicate_records">Loading..</p>
         </div>
         <div class="records-cards primarykey">
             <h4 class="card-label">PK Duplicates</h4>
-            <p class="number" id="pk_duplicates">{{ data.pk_duplicates }}</p>
+            <p class="number" id="pk_duplicates">Loading..</p>
         </div>
     </div>
     <div class="charts">
@@ -60,5 +60,6 @@
         </div>
     </div>
     <script src="/static/scripts.js"></script>
+    <script src="/static/script2.js"></script>
 </body>
 </html>

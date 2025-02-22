@@ -25,7 +25,11 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
-@app.get("/api/data-quality", response_class=HTMLResponse, status_code=200)
+@app.get("/api/data-quality", response_class=HTMLResponse)
+async def serve_html(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/api", response_class=JSONResponse, status_code=200)
 async def get_data(request: Request):
     df = read_data()
     total_records = df.loc["total_records", "Values"]
@@ -46,7 +50,7 @@ async def get_data(request: Request):
         "pk_check": pk_check
     }
 
-    return templates.TemplateResponse("index.html", {"request":request, "data": quality_stats})
+    return JSONResponse(content=quality_stats)
 
 
 @app.get("/api/metrics", response_class=JSONResponse)

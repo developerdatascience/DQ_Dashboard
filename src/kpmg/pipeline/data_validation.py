@@ -152,7 +152,6 @@ class DataValidation:
 
         reports = self.spark.createDataFrame([(k, v) for k, v in stats.items()], schema)
         reports = reports.toPandas()
-        reports.head()
         reports.to_csv("artifacts/reports.csv", index=True)
         logger.info("reports exported to artifacts")
 
